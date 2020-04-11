@@ -25,15 +25,15 @@ public interface UserDao {
                 enabled BOOLEAN NOT NULL)""")
     void createTable();
 
-    @SqlUpdate("INSERT INTO user (username, password, name, email, gener, dob, enabled) VALUES (:username, :password, :name, :email, :gener, :dob, :enabled)")
+    @SqlUpdate("INSERT INTO user (username, password, name, email, gender, dob, enabled) VALUES (:username, :password, :name, :email, :gender, :dob, :enabled)")
     @GetGeneratedKeys
-    long insertUser(@BindBean User user);
+    long insert(@BindBean User user);
 
     @SqlQuery("SELECT * FROM user WHERE id = :id")
-    Optional<User> getUser(@Bind("id") long id);
+    Optional<User> findById(@Bind("id") long id);
 
     @SqlQuery("SELECT * FROM user WHERE username = :username")
-    Optional<User> getUser(@Bind("username") String username);
+    Optional<User> findByUsername(@Bind("username") String username);
 
     @SqlUpdate("DELETE FROM user WHERE username = :username")
     void delete(@BindBean User user);
